@@ -98,7 +98,7 @@ module.exports = class Aggrigator {
               Providers.instances[provider.name] = provider
             }
             //log(Providers)
-            return this.fetchData(Providers, config)
+            return await this.fetchData(Providers, config)
           })
         } catch (error) {
           log(error)
