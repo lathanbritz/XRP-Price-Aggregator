@@ -74,11 +74,11 @@ module.exports = class Aggrigator {
           ...filtered
         }
       },
-      async fetchSources(group = 'fancy') {
+      fetchSources(group = 'fancy') {
         try {
           // first load our file then start the server
           const self = this
-          fs.readFile(path.join(__dirname + '/providers/sources.json'), (err, data) => {
+          fs.readFile(path.join(__dirname + '/providers/sources.json'), async (err, data) => {
             if (err) throw err
 
             const source = JSON.parse(data)
