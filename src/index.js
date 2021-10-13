@@ -14,7 +14,7 @@ const OracleProvider = require('./providers/OracleProvider.js')
 
 const log = debug('oracle:main')
 
-class Aggrigator {
+module.exports = class Aggrigator {
 
   constructor() {
 
@@ -112,5 +112,5 @@ class Aggrigator {
 // log(Object.assign([], selectors))
 
 
-const agg = new Aggrigator()
-return agg.fetchSources()
+// const agg = new Aggrigator()
+// return agg.fetchSources()
