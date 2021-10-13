@@ -12,7 +12,7 @@ const OracleProvider = require('./providers/OracleProvider.js')
 //   instances: {}
 // }
 
-const log = debug('oracle:main')
+const log = debug('aggrigator:main')
 
 module.exports = class Aggrigator {
 
