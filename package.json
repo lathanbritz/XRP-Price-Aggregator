@@ -1,13 +1,12 @@
 {
   "name": "xrp-price-aggregator",
   "version": "0.0.1",
-  "type": "module",
-  "description": "Fetches XRP (USD) prices from multiple data sources, filters out based on stdev",
+  "description": "Generic price fetcher, filters out based on stdev",
   "main": "src/index.js",
   "scripts": {
     "dev": "DEBUG=oracle* nodemon src/index.js"
   },
-  "author": "Wietse Wind <w@xrpl-labs.com>",
+  "author": "Lathan Britz",
   "license": "MIT",
   "devDependencies": {
     "debug": "^4.3.1",
@@ -15,7 +14,9 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
     "stats-analysis": "^2.0.0"
   }
 }
