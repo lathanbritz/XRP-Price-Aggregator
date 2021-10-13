@@ -74,7 +74,7 @@ module.exports = class Aggrigator {
           ...filtered
         }
       },
-      fetchSources(group = 'fancy') {
+      async fetchSources(group = 'fancy') {
         try {
           // first load our file then start the server
           const self = this
