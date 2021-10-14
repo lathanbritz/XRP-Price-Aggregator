@@ -30,19 +30,17 @@ class aggrigator {
           log(`could not find ${group} key in JSON`)
           return 
         }
-        if (!(group in data.config)) { 
-          log(`could not find ${group} key in config JSON`)
+        if (!('config' in data[group])) { 
+          log(`could not find config key in ${group} JSON`)
           return 
         }
 
-        const config = data.config[group]
+        const config = data[group].config
 
-        for (var i = data[group].length - 1; i >= 0; i--) {
-          const provider = new OracleProvider(data[group][i])
+        for (var i = data[group].data.length - 1; i >= 0; i--) {
+          const provider = new OracleProvider(data[group].data[i])
           Providers.instances[provider.name] = provider
         }
-        // log('Providers')
-        // log(Providers)
 
         const results = await Promise.all(Object.keys(Providers.instances).map(async name => {
           log(`delay ${config.call}`)
@@ -89,7 +87,8 @@ class aggrigator {
         log(filtered)
 
         const meta = {
-          'currency': config.currency,
+          'type': config.type,
+          'symbol': config.symbol,
           'executeTime': new Date() - start 
         }
 
@@ -105,5 +104,5 @@ class aggrigator {
 
 module.exports = aggrigator
 
-// const agg = new aggrigator()
-// agg.run()
+const agg = new aggrigator()
+agg.run()
