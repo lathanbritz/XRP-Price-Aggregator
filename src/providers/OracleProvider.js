@@ -1,8 +1,9 @@
-const fetch = require('node-fetch')
-const debug = require('debug')
-const log = debug('oracle:provider')
+import fetch from 'node-fetch'
+import debug from 'debug'
 
-module.exports = class OracleProvider {
+const log = debug('aggrigator:provider')
+
+export default class OracleProvider {
   constructor (source) {
     this.name = source.name
     this.url = source.url
