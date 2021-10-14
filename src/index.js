@@ -13,7 +13,7 @@ const Providers = {
 const log = debug('aggrigator:main')
 
 class aggrigator {
-  constructor(group = 'fancy') {
+  constructor(group = 'btc') {
 
     Object.assign(this, {
       async run() {
@@ -73,11 +73,17 @@ class aggrigator {
         }
 
         log(raw)
+        let filteredResults = rawMedian
+        let filteredMedian = rawMedian
+        let filteredMean = rawMedian
 
-        const filteredResults = rawResults.filter(r => Math.abs(r - rawMedian) < rawStdev)
-        const filteredMedian = stats.median(filteredResults)
-        const filteredMean = stats.mean(filteredResults)
-        
+        // deal with the case there is only one result.
+        if (rawStdev != 0) {
+          let filteredResults = rawResults.filter(r => Math.abs(r - rawMedian) < rawStdev)
+          let filteredMedian = stats.median(filteredResults)
+          let filteredMean = stats.mean(filteredResults)
+        }
+
         const filtered = {
           filteredResults,
           filteredMedian,
