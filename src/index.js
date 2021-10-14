@@ -20,6 +20,7 @@ class aggrigator {
     log('hi')
     Object.assign(this, {
       async run() {
+        const start = new Date()
         dotenv.config()
 
         const Providers = {
@@ -90,8 +91,10 @@ class aggrigator {
         log(filtered)
 
         const meta = {
-          config
+          'currency': config.currency,
+          'executeTime': new Date() - start 
         }
+
         return {
           ...raw,
           ...filtered,
