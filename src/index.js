@@ -104,5 +104,5 @@ class aggrigator {
 
 module.exports = aggrigator
 
-const agg = new aggrigator()
-agg.run()
+// const agg = new aggrigator()
+// agg.run()
