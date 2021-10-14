@@ -17,7 +17,6 @@ const log = debug('aggrigator:main')
 class aggrigator {
   constructor(group = 'fancy') {
 
-    log('hi')
     Object.assign(this, {
       async run() {
         const start = new Date()
@@ -44,11 +43,12 @@ class aggrigator {
           const provider = new OracleProvider(data[group][i])
           Providers.instances[provider.name] = provider
         }
-        log('Providers')
-        log(Providers)
-
+        // log('Providers')
+        // log(Providers)
 
         const results = await Promise.all(Object.keys(Providers.instances).map(async name => {
+          log(`delay ${config.call}`)
+          log(`calls ${config.delay}`)
           log(`  - Getting from ${name}`)
           const data = await Providers.instances[name].getMultiple(
             Number(config.call),
