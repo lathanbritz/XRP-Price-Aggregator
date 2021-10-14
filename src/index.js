@@ -89,9 +89,13 @@ class aggrigator {
 
         log(filtered)
 
+        const meta = {
+          config
+        }
         return {
           ...raw,
-          ...filtered
+          ...filtered,
+          ...meta
         }
       }
     })
