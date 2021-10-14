@@ -4,8 +4,6 @@ const dotenv = require('dotenv')
 const axios = require('axios')
 const debug = require('debug')
 const stats = require('stats-analysis')
-const fs = require('fs')
-const path = require('path')
 const OracleProvider = require('./providers/OracleProvider.js')
 
 const Providers = {

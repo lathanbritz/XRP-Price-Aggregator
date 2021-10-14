@@ -15,9 +15,7 @@
   "dependencies": {
     "axios": "^0.23.0",
     "dotenv": "^10.0.0",
-    "fs": "^0.0.1-security",
     "node-fetch": "^2.6.1",
-    "path": "^0.12.7",
     "stats-analysis": "^2.0.0"
   }
 }
