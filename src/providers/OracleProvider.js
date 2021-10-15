@@ -8,6 +8,7 @@ module.exports = class OracleProvider {
     this.name = source.name
     this.url = source.url
     this.selector = source.selector
+    this.invert = source.invert
   }
 
   async getJSON (endpoint) {
