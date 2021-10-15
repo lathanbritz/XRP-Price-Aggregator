@@ -63,7 +63,7 @@ class aggrigator {
         
         const rawResults = results.reduce((a, b) => a.concat(b), [])
         const rawMedian = stats.median(rawResults)
-        let rawStdev = stats.stdev(rawResults).toFixed(8) * 1
+        let rawStdev = stats.stdev(rawResults) * 1
 
         const raw = {
           rawResultsNamed,
@@ -105,7 +105,7 @@ class aggrigator {
       reduce(rawResults, rawMedian, rawStdev) {
         const result = []
         for (var i = rawResults.length - 1; i >= 0; i--) {
-          if (Math.abs(rawResults[i] - rawMedian) < rawStdev) {
+          if (Math.abs(rawResults[i] - rawMedian) <= rawStdev) {
             result.push(rawResults[i])
           }
         }
