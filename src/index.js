@@ -63,7 +63,7 @@ class aggrigator {
         
         const rawResults = results.reduce((a, b) => a.concat(b), [])
         const rawMedian = stats.median(rawResults)
-        const rawStdev = stats.stdev(rawResults)
+        const rawStdev = stats.stdev(rawResults).toFixed(8) * 1
 
         const raw = {
           rawResultsNamed,
@@ -77,7 +77,7 @@ class aggrigator {
         let filteredMedian = rawMedian
         let filteredMean = rawMedian
 
-        // deal with the case there is only one result.
+        // deal with this case there is only one result.
         if (rawStdev != 0) {
           let filteredResults = rawResults.filter(r => Math.abs(r - rawMedian) < rawStdev)
           let filteredMedian = stats.median(filteredResults)
@@ -110,5 +110,5 @@ class aggrigator {
 
 module.exports = aggrigator
 
-// const agg = new aggrigator()
-// agg.run()
+const agg = new aggrigator()
+agg.run()
