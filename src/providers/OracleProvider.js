@@ -29,29 +29,29 @@ module.exports = class OracleProvider {
     })
   }
 
-  async getWithTimeout (timeoutMs, invert) {
+  async getWithTimeout (timeoutMs) {
     return await Promise.race([
-      this.get(invert),
+      this.get(),
       this.delay(timeoutMs)
     ])
   }
 
-  async getMultiple (count = 5, delayMs = 1000, timeoutMs = 3000, invert = false) {
+  async getMultiple (count = 5, delayMs = 1000, timeoutMs = 3000) {
     return (await Array(Number(count)).fill('').reduce(async Arr => {
       ;(await Arr).push(await (async () => {
         await this.delay(delayMs)
-        return await this.getWithTimeout(timeoutMs, invert)
+        return await this.getWithTimeout(timeoutMs)
       })())
       return await Arr
     }, [])).filter(r => r !== undefined)
   }
 
-  async get (invert) {
+  async get () {
     try {
       const data = await this.getJSON(this.url)
       const selectedElement = this.parse(data, this.selector)
       log(`Parsing ${this.name}, result: ${selectedElement}`)
-      if (invert) {
+      if (this.invert) {
         return 1/selectedElement  
       }
       return selectedElement
