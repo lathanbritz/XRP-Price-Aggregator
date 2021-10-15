@@ -48,7 +48,8 @@ class aggrigator {
           log(`  - Getting from ${name}`)
           const data = await Providers.instances[name].getMultiple(
             Number(config.call),
-            Number(config.delay) * 1000
+            Number(config.delay) * 1000,
+            config.invert
           )
           log(`     - Got data from ${name}`)
           return data
