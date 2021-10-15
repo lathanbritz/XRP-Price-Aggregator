@@ -13,7 +13,7 @@ const Providers = {
 const log = debug('aggrigator:main')
 
 class aggrigator {
-  constructor(group = 'btc') {
+  constructor(group = 'basic') {
 
     Object.assign(this, {
       async run() {
@@ -42,10 +42,8 @@ class aggrigator {
           Providers.instances[provider.name] = provider
         }
 
-        const results = await Promise.all(Object.keys(Providers.instances).map(async name => {
-          log(`delay ${config.call}`)
-          log(`calls ${config.delay}`)
-          log(`  - Getting from ${name}`)
+        let results = await Promise.all(Object.keys(Providers.instances).map(async name => {
+          log(`  - Getting from ${name}, calls: ${config.call}, delay ${config.delay}`)
           const data = await Providers.instances[name].getMultiple(
             Number(config.call),
             Number(config.delay) * 1000
@@ -53,6 +51,17 @@ class aggrigator {
           log(`     - Got data from ${name}`)
           return data
         }))
+
+        // check we have data        
+        const temp = []
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].length > 0) {
+            temp.push(results[i])
+          }
+        }
+        results = temp
+        if (results.length == 0) { return {} }
+
 
         const rawResultsNamed = results.reduce((a, b, i) => {
           Object.assign(a, {

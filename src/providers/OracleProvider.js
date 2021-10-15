@@ -65,9 +65,10 @@ module.exports = class OracleProvider {
 
   parse(data, selector) {
     if (selector == null)  { return } 
-    // log(data)
+    if (data == null) { return }
     let value = eval(selector)
 
+    
     log('selector: ' + `${selector}`)
     return Number(value) || undefined
   }
