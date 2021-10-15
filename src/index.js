@@ -76,9 +76,9 @@ class aggrigator {
         
         // filter fails on a zero value
         if (rawStdev == 0) {
-          rawStdev = (0.0000001).toFixed(7)
+          rawStdev = (0.00000001).toFixed(8)
         }
-        const filteredResults = rawResults.filter(r => (Math.abs( (r - rawMedian).toFixed(7) )).toFixed(7) < rawStdev)
+        const filteredResults = reduce(rawResults, rawMedian, rawStdev) //rawResults.filter(r => (Math.abs( (r - rawMedian).toFixed(7) )).toFixed(7) < rawStdev)
         const filteredMedian = stats.median(filteredResults)
         const filteredMean = stats.mean(filteredResults)
 
@@ -101,6 +101,16 @@ class aggrigator {
           ...filtered,
           ...meta
         }
+      },
+      reduce(rawResults, rawMedian, rawStdev) {
+        const result = []
+        for (var i = arr.length - 1; i >= 0; i--) {
+          if (Math.abs(arr[i] - rawMedian) < rawStdev) {
+            result.push(arr[i])
+          }
+        }
+        //log(result)
+        return result
       }
     })
   }
