@@ -104,9 +104,9 @@ class aggrigator {
       },
       reduce(rawResults, rawMedian, rawStdev) {
         const result = []
-        for (var i = arr.length - 1; i >= 0; i--) {
-          if (Math.abs(arr[i] - rawMedian) < rawStdev) {
-            result.push(arr[i])
+        for (var i = rawResults.length - 1; i >= 0; i--) {
+          if (Math.abs(rawResults[i] - rawMedian) < rawStdev) {
+            result.push(rawResults[i])
           }
         }
         //log(result)
