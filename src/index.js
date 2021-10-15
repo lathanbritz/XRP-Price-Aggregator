@@ -76,9 +76,9 @@ class aggrigator {
         
         // filter fails on a zero value
         if (rawStdev == 0) {
-          rawStdev = 0.00000001
+          rawStdev = 0.000000001
         }
-        const filteredResults = rawResults.filter(r => Math.abs(r - rawMedian) < rawStdev)
+        const filteredResults = rawResults.filter(r => Math.abs( (r - rawMedian).toFixed(8) ) < rawStdev)
         const filteredMedian = stats.median(filteredResults)
         const filteredMean = stats.mean(filteredResults)
 
