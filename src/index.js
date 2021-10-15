@@ -52,6 +52,12 @@ class aggrigator {
           return data
         }))
 
+        const meta = {
+          'type': config.type,
+          'symbol': config.symbol,
+          'executeTime': new Date() - start 
+        }
+
         // check we have data        
         const temp = []
         for (var i = 0; i < results.length; i++) {
@@ -60,7 +66,7 @@ class aggrigator {
           }
         }
         results = temp
-        if (results.length == 0) { return {} }
+        if (results.length == 0) { return { ...meta } }
 
 
         const rawResultsNamed = results.reduce((a, b, i) => {
@@ -98,12 +104,6 @@ class aggrigator {
         }
 
         log(filtered)
-
-        const meta = {
-          'type': config.type,
-          'symbol': config.symbol,
-          'executeTime': new Date() - start 
-        }
 
         return {
           ...raw,
