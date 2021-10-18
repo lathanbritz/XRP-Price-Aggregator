@@ -1,10 +1,14 @@
-import fetch from 'node-fetch'
-import debug from 'debug'
+const fetch = require('node-fetch')
+const debug = require('debug')
 
-const log = debug('oracle:provider')
+const log = debug('aggrigator:provider')
 
-export default class OracleProvider {
-  constructor () { 
+module.exports = class OracleProvider {
+  constructor (source) {
+    this.name = source.name
+    this.url = source.url
+    this.selector = source.selector
+    this.invert = source.invert
   }
 
   async getJSON (endpoint) {
@@ -41,5 +45,31 @@ export default class OracleProvider {
       })())
       return await Arr
     }, [])).filter(r => r !== undefined)
+  }
+
+  async get () {
+    try {
+      const data = await this.getJSON(this.url)
+      const selectedElement = this.parse(data, this.selector)
+      log(`Parsing ${this.name}, result: ${selectedElement}`)
+      if (this.invert) {
+        return 1/selectedElement  
+      }
+      return selectedElement
+      
+    } catch (e) {
+      log('Error', e.message)
+      return undefined
+    }
+  }
+
+  parse(data, selector) {
+    if (selector == null)  { return } 
+    if (data == null) { return }
+    let value = eval(selector)
+
+    
+    log('selector: ' + `${selector}`)
+    return Number(value) || undefined
   }
 }
