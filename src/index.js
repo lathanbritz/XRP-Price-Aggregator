@@ -13,8 +13,11 @@ const Providers = {
 const log = debug('aggrigator:main')
 
 class aggrigator {
-  constructor(aggrigator_url = 'http://localhost:5000/api/feed/data', group = 'basic') {
-
+  constructor(url, group = 'basic') {
+    if ('url' == null) {
+      log('No callback URL provided exiting.')
+      return
+    }
     Object.assign(this, {
       async run() {
         const start = new Date()
@@ -24,8 +27,8 @@ class aggrigator {
           instances: {}
         }
 
-        log('AGGRIGATOR_PROVIDER_URL: ' + aggrigator)
-        let { data } = await axios.get(aggrigator)
+        log('AGGRIGATOR_PROVIDER_URL: ' + url)
+        let { data } = await axios.get(url)
         if (!(group in data)) { 
           log(`could not find ${group} key in JSON`)
           return 
