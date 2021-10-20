@@ -13,7 +13,7 @@ const Providers = {
 const log = debug('aggrigator:main')
 
 class aggrigator {
-  constructor(group = 'basic') {
+  constructor(aggrigator_url = 'http://localhost:5000/api/feed/data', group = 'basic') {
 
     Object.assign(this, {
       async run() {
@@ -23,7 +23,7 @@ class aggrigator {
         const Providers = {
           instances: {}
         }
-        const aggrigator = process.env.AGGRIGATOR_PROVIDER_URL || 'http://localhost:5000/api/feed/data'
+
         log('AGGRIGATOR_PROVIDER_URL: ' + aggrigator)
         let { data } = await axios.get(aggrigator)
         if (!(group in data)) { 
